@@ -14,7 +14,7 @@ st.set_page_config(
 
 # --- GEMINI API INTEGRATION ---
 # ⚠️ SECURITY NOTICE: Put your real Gemini API key between the quotes below
-GEMINI_API_KEY = "YOUR_GEMINI_API_KEY" 
+GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"] 
 genai.configure(api_key=GEMINI_API_KEY)
 
 # Initialized models with the correct '-latest' tag
