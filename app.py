@@ -308,8 +308,8 @@ elif menu_choice == L["nav_about"]:
         Driven by this reality, we engineered this unified hub to place world-class machine vision capabilities right into the hands of individual farmers. By linking high-performance cloud intelligence with the raw resilience of Indian farming, we aim to eliminate guesswork in crop management, protect ancestral farmlands, and secure local agricultural economics.
         
         ### 👥 Core Architecture Group
-        * **Karmjeet Rathod** — Lead AI Architect & Full-Stack Systems Engineer
-        * *(Add other team members here)*
+        * **Karmjeetsinh Rathod** — Lead
+        * **Manan Patel**  — Core member
         """)
     st.markdown('</div>', unsafe_allow_html=True)
 
