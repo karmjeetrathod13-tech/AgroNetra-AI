@@ -226,14 +226,20 @@ if menu_choice == L["nav_scanner"]:
             
             if st.button(L["scan_btn"], type="primary", use_container_width=True):
                 with st.spinner("Processing image via AgroNetra Engine... Please stand by."):
+                    # 💡 NEW UPGRADED PROMPT FOR FARMER-FRIENDLY LANGUAGE
                     analysis_prompt = f"""
-                    You are a senior plant pathologist. Analyze this crop leaf image accurately and compose a structured diagnostic report explicitly in the language: {selected_lang_name}.
+                    You are a friendly, local agricultural expert (Krushisevak). Analyze this crop leaf image accurately and compose a highly practical, easy-to-understand diagnostic report explicitly in the language: {selected_lang_name}.
                     
-                    Return response using the exact following sections:
-                    ### 📋 1. Target Crop & Disease Identification
-                    ### 🔍 2. Root Causes & Conditions
-                    ### 🌿 3. Biological & Ecological Cures
-                    ### 🧪 4. Targeted Chemical Treatments
+                    CRITICAL INSTRUCTIONS:
+                    1. Use very simple, everyday, farmer-friendly words. Do not use complicated scientific or academic jargon.
+                    2. Speak directly to the farmer with clear, actionable, and practical advice.
+                    3. Clearly identify the COMMON NAME of the crop and the disease right at the beginning.
+                    
+                    Return your response using exactly these straightforward headers:
+                    ### 📋 1. Crop Name & Disease Type
+                    ### 🔍 2. Why Did This Happen? (Simple Causes)
+                    ### 🌿 3. Natural & Home Remedies
+                    ### 🧪 4. Medicines & Shop Treatments
                     """
                     try:
                         response = vision_model.generate_content([analysis_prompt, img_open])
@@ -248,7 +254,10 @@ if menu_choice == L["nav_scanner"]:
 # --- PAGE 2: KRUSHISEVAK CHAT BOX ---
 elif menu_choice == L["nav_chat"]:
     st.markdown(f'<h1 class="animated-header">{L["chat_title"]}</h1>', unsafe_allow_html=True)
+    
+    st.markdown('<div class="glass-container">', unsafe_allow_html=True)
     st.write(f"This assistant adapts directly to your dialect. Chat naturally in **{selected_lang_name}**.")
+    st.markdown("<hr style='border: 1px solid rgba(46, 125, 50, 0.2);'>", unsafe_allow_html=True)
     
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
@@ -275,17 +284,19 @@ elif menu_choice == L["nav_chat"]:
                     st.session_state.chat_history.append({"role": "assistant", "content": ai_reply})
                 except Exception as chat_ex:
                     st.error(f"Chat stream latency or interruption: {chat_ex}")
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # --- PAGE 3: ABOUT CORE VISION ---
 elif menu_choice == L["nav_about"]:
     st.markdown('<h1 class="animated-header">Innovation Born From the Soil</h1>', unsafe_allow_html=True)
     
+    st.markdown('<div class="glass-container">', unsafe_allow_html=True)
     col1, col2 = st.columns([1, 2])
     with col1:
         st.markdown("<br><br>", unsafe_allow_html=True)
         st.metric(label="System Target Latency", value="< 2.4s")
         st.metric(label="Supported Vernaculars", value="4 Core Languages")
-        st.metric(label="Core Diagnostics Engine", value="Gemini 1.5 Pro")
+        st.metric(label="Core Diagnostics Engine", value="Gemini 2.5 Flash")
         
     with col2:
         st.markdown(f"""
@@ -300,10 +311,13 @@ elif menu_choice == L["nav_about"]:
         * **Karmjeet Rathod** — Lead AI Architect & Full-Stack Systems Engineer
         * *(Add other team members here)*
         """)
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # --- PAGE 4: FARMER SUPPORT DESK ---
 elif menu_choice == L["nav_support"]:
     st.markdown(f'<h1 class="animated-header">{L["nav_support"]}</h1>', unsafe_allow_html=True)
+    
+    st.markdown('<div class="glass-container">', unsafe_allow_html=True)
     st.write("Experiencing technical friction or need human intervention? Fill out this ticket and our field agents will step in.")
     
     with st.form("support_ticket_form", clear_on_submit=True):
@@ -318,3 +332,4 @@ elif menu_choice == L["nav_support"]:
                 st.balloons() 
             else:
                 st.warning("Please complete the required name and phone fields before submitting.")
+    st.markdown('</div>', unsafe_allow_html=True)
