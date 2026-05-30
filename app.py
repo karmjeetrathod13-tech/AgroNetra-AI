@@ -170,11 +170,16 @@ LANG_DATA = {
     }
 }
 
+# 💡 UPDATED: Expanded quote library with powerful agriculture quotes
 INDIAN_AGRI_QUOTES = [
     "\"If agriculture goes wrong, nothing else will have a chance to go right in the country.\" — Dr. M.S. Swaminathan",
     "\"Jai Jawan, Jai Kisan, Jai Vigyan, Jai Anusandhan.\" — Indian National Slogan",
     "\"To forget how to dig the earth and to tend the soil is to forget ourselves.\" — Mahatma Gandhi",
-    "\"The soul of India lives in its villages, and the heart of those villages is our farmers.\" — Traditional Indian Wisdom"
+    "\"The soul of India lives in its villages, and the heart of those villages is our farmers.\" — Traditional Indian Wisdom",
+    "\"Everything else can wait, but not agriculture.\" — Jawaharlal Nehru",
+    "\"A farmer is a magician who produces money from the mud.\" — Amit Kalantri",
+    "\"Farming is a profession of hope.\" — Brian Brett",
+    "\"Agriculture is the most healthful, most useful, and most noble employment of man.\" — George Washington"
 ]
 
 # --- SIDEBAR BRANDING ---
@@ -200,6 +205,13 @@ menu_choice = st.sidebar.radio(
 
 # --- PAGE 1: DISEASE SCANNER ---
 if menu_choice == L["nav_scanner"]:
+    
+    # 💡 UPDATED: Display Logo centered on the Main Page
+    if os.path.exists(logo_path):
+        logo_col1, logo_col2, logo_col3 = st.columns([2, 1, 2])
+        with logo_col2:
+            st.image(logo_path, use_container_width=True)
+
     st.markdown(f'<h1 class="animated-header"><span class="brand-highlight">AgroNetra AI</span><br>Crop Disease Prediction</h1>', unsafe_allow_html=True)
     
     selected_quote = random.choice(INDIAN_AGRI_QUOTES)
@@ -226,7 +238,6 @@ if menu_choice == L["nav_scanner"]:
             
             if st.button(L["scan_btn"], type="primary", use_container_width=True):
                 with st.spinner("Processing image via AgroNetra Engine... Please stand by."):
-                    # 💡 NEW UPGRADED PROMPT FOR FARMER-FRIENDLY LANGUAGE
                     analysis_prompt = f"""
                     You are a friendly, local agricultural expert (Krushisevak). Analyze this crop leaf image accurately and compose a highly practical, easy-to-understand diagnostic report explicitly in the language: {selected_lang_name}.
                     
@@ -308,8 +319,8 @@ elif menu_choice == L["nav_about"]:
         Driven by this reality, we engineered this unified hub to place world-class machine vision capabilities right into the hands of individual farmers. By linking high-performance cloud intelligence with the raw resilience of Indian farming, we aim to eliminate guesswork in crop management, protect ancestral farmlands, and secure local agricultural economics.
         
         ### 👥 Core Architecture Group
-        * **Karmjeetsinh Rathod** — Lead
-        * **Manan Patel**  — Core member
+        * **Karmjeet Rathod** — Lead AI Architect & Full-Stack Systems Engineer
+        * *(Add other team members here)*
         """)
     st.markdown('</div>', unsafe_allow_html=True)
 
